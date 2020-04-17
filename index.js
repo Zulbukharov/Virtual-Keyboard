@@ -42,12 +42,14 @@ inputBox.setAttribute("cols", "50");
 inputBox.focus();
 
 let keyboardContainer = document.createElement("div");
+keyboardContainer.classList.add("container");
 
 let rows = [];
 
 for (let i = 0; i < 5; i++) {
   rows[i] = document.createElement("div");
   rows[i].classList.add("flex-container");
+  rows[i].classList.add("row");
 }
 
 let i = 1;
@@ -91,9 +93,8 @@ const keyEventDown = (e) => {
   let key = document.querySelector(`#${e.code}`);
   if (!key) {
     console.error(`error key ${e.code}`);
+    return;
   }
-  // if this key is shift, render new dom
-  console.log(e);
   if (e.key === "Shift" || e.key === "CapsLock") {
     getNewTypeAfterCapsLockOrShift(currentType);
     setKeyboardValues(currentType);
@@ -116,13 +117,32 @@ const keyEventUp = (e) => {
   let key = document.querySelector(`#${e.code}`);
   if (!key) {
     console.error(`error key ${e.code}`);
+    return;
   }
   if (e.key == "Shift" || e.key === "CapsLock") {
     getNewTypeAfterCapsLockOrShift(currentType);
     setKeyboardValues(currentType);
   }
   key.classList.remove("pressed");
+  inputBox.focus();
 };
+
+const hop1 = (e) => {
+    if (!e.target.id)
+        return;
+    let event1 = new KeyboardEvent("keydown", {code: e.target.id, key: macKeyboard[e.target.id][currentType]});
+    document.dispatchEvent(event1);
+};
+
+const hop2 = (e) => {
+    if (!e.target.id)
+        return;
+    let event2 = new KeyboardEvent("keyup", {code: e.target.id, key: macKeyboard[e.target.id][currentType]});
+    document.dispatchEvent(event2);
+};
+
+keyboardContainer.addEventListener("mousedown", hop1);
+keyboardContainer.addEventListener("mouseup", hop2);
 
 document.addEventListener("keydown", keyEventDown);
 document.addEventListener("keyup", keyEventUp);
@@ -134,6 +154,10 @@ for (let i = 0; i < 5; i++) {
 
 document.body.appendChild(inputBox);
 document.body.appendChild(keyboardContainer);
+
+let help = document.createElement("div");
+help.innerHTML = "<span>press Control + Alt</span>";
+document.body.appendChild(help);
 
 window.onload = function () {
   document.querySelector("textarea").focus();
