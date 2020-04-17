@@ -19,6 +19,7 @@ export const specialSymbols = {
   Control: (inputBox) => inputBox,
   Alt: (inputBox) => inputBox,
   CapsLock: (inputBox) => inputBox,
+  FN: () => console.log("here is the flag{there_are_no_events_for_FN_on_mac}"),
   ArrowLeft: (inputBox) => {
     console.log(inputBox.cols);
     inputBox.selectionEnd -= 1;
@@ -26,12 +27,10 @@ export const specialSymbols = {
     // split by newline
     console.log(inputBox.selectionStart, inputBox.selectionEnd);
     // return to n element
-    inputBox.focus();
   },
   ArrowRight: (inputBox) => {
     console.log(inputBox.selectionStart, inputBox.selectionEnd);
     inputBox.selectionStart = inputBox.selectionEnd + 1;
-    inputBox.focus();
   },
   // looking for last newline, depends on current cursor
   ArrowUp: (inputBox) => {
@@ -45,7 +44,6 @@ export const specialSymbols = {
       .lastIndexOf("\n");
     indexOfLastNewLine = indexOfLastNewLine === -1 ? 0 : indexOfLastNewLine;
     inputBox.selectionEnd = indexOfLastNewLine;
-    inputBox.focus();
     // inputBox.selectionStart -= indexOfLastNewLine + 1;
     // console.log(inputBox.selectionEnd);
     // console.log(inputBox.value.split("\n"));
@@ -59,7 +57,6 @@ export const specialSymbols = {
     console.log(indexOfNext);
     indexOfNext = indexOfNext === -1 ? 0 : indexOfNext;
     inputBox.selectionStart = indexOfNext;
-    inputBox.focus();
   },
 };
 
@@ -431,27 +428,27 @@ export const macKeyboard = {
     R: "Alt",
   },
   ArrowLeft: {
-    e: "ArrowLeft",
-    E: "ArrowLeft",
-    r: "ArrowLeft",
-    R: "ArrowLeft",
+    e: "<",
+    E: "<",
+    r: "<",
+    R: "<",
   },
   ArrowUp: {
-    e: "ArrowUp",
-    E: "ArrowUp",
-    r: "ArrowUp",
-    R: "ArrowUp",
+    e: "^",
+    E: "^",
+    r: "^",
+    R: "^",
   },
   ArrowDown: {
-    e: "ArrowDown",
-    E: "ArrowDown",
-    r: "ArrowDown",
-    R: "ArrowDown",
+    e: "?",
+    E: "?",
+    r: "?",
+    R: "?",
   },
   ArrowRight: {
-    e: "ArrowRight",
-    E: "ArrowRight",
-    r: "ArrowRight",
-    R: "ArrowRight",
+    e: ">",
+    E: ">",
+    r: ">",
+    R: ">",
   },
 };

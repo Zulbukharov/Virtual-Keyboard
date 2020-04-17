@@ -217,13 +217,23 @@
 }
 
 body {
-    font-family: Inter;
+  font-family: Inter;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container {
+  outline: solid 1px blue;
+  box-shadow: 4px 4px 0px blue;
+  margin-bottom: 1em;
+  padding: 0.25em 0.5em;
 }
 
 .flex-container {
   display: flex;
   justify-content: center;
-  background-color: DodgerBlue;
 }
 
 .flex-container > div {
@@ -237,14 +247,19 @@ body {
 }
 
 .flex-container > .pressed {
-  background-color: aqua;
+  background-color: #0080FE;
+  color: white;
 }
 
 #area {
-  width: 95%;
+  width: 100%;
   box-sizing: border-box;
   height: 250px;
   border: 1px solid black;
   display: block;
   font-size: 32px;
+  outline: solid 1px blue;
+  box-shadow: 4px 4px 0px blue;
+  padding: 0.25em 0.5em;
+  margin-bottom: 1em;
 }
